@@ -70,7 +70,7 @@ def preprocess(dir, file, write=True, currentPage=None):
     contents = ""
 
     for line in f.readlines():
-        if "<!" in line:
+        if "<!" in line and "!>" in line:
             results = re.search('<!(.*)!>', line)
             for result in results.groups():
                 line = re.sub(f"<!{result}!>", specialOperation(result, currentPage), line)
