@@ -133,6 +133,7 @@ def generate_site():
     copy2("static/github-dark.css", "output")
     copy2("static/github-markdown-dark.css", "output")
     copy2("static/style.css", "output")
+    copy2("custom_stylesheet.css", "output")
             
 
     #Delete temp files
