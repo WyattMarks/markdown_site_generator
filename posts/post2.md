@@ -8,5 +8,3 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-
-### Did the second post work too? Now this is newer

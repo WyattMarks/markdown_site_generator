@@ -7,5 +7,3 @@ int main() {
     return 0;
 }
 ```
-
-### did it work? IM NEWER

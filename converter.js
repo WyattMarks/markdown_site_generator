@@ -34,6 +34,8 @@ try {
     });
 
     converter.setOption('customizedHeaderId', true);
+    converter.setOption('strikethrough', true);
+    converter.setOption('emoji', true);
 
     //Convert and write the file
     data = pre_html + converter.makeHtml(data) + post_html;

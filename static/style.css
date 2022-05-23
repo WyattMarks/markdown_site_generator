@@ -25,3 +25,14 @@ h2[id^="post"] {
 h6[id^="date"] {
     margin-top: 0;
 }
+
+/*Old, from previous website. For MC Color Picker*/
+input.mcnumber {
+    border: 1px solid #333;
+    margin: 0;
+    padding: 0 0.5em;
+    font-size: 1rem;
+    line-height: 1.5em;
+    border-radius: 3px;
+    width: 5em;
+  }
