@@ -1,10 +1,12 @@
 import urllib.request
 contents = urllib.request.urlopen("http://wyattmarks.com/index.html").read().splitlines() # Currently just GETing the HTML file, need to integrate into the generator
 import re
+import datetime
+from email.utils import format_datetime
 
 
 BASE_URL = "https://wyattmarks.com/"
-TITLE = "Wyatt Marks"
+TITLE = "wyattmarks.com"
 DESCRIPTION = "Wyatt Marks' Blog"
 
 
@@ -19,7 +21,6 @@ rss = f"""
 """
 
 insidePost = False
-
 
 for line in contents:
     if b'id="post' in line:
@@ -38,7 +39,11 @@ for line in contents:
         rss += '\t<guid isPermaLink="true">' + link + '</guid>\n'
 
     elif b'id="date' in line:
+
         date = re.search('">(.*)</h', str(line)).group(1)
+        dt = datetime.datetime.strptime(date, "%m/%d/%y") # Thankfully does not assume 1900s
+        date = format_datetime(dt) # RFC 822 format
+
         rss += "\t<pubDate>" + date + "</pubDate>\n"
         rss += "\t<description><![CDATA[\n"
     elif insidePost:
