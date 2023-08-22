@@ -23,7 +23,8 @@ rss = f"""
 insidePost = False
 
 for line in contents:
-    if b'id="post' in line:
+    line = line.decode('utf-8')
+    if 'id="post' in line:
         if insidePost:
             rss += "\t]]></description>\n"
             rss += "</item>\n"
@@ -38,7 +39,7 @@ for line in contents:
         rss += "\t<link>" + link + "</link>\n"
         rss += '\t<guid isPermaLink="true">' + link + '</guid>\n'
 
-    elif b'id="date' in line:
+    elif 'id="date' in line:
 
         date = re.search('">(.*)</h', str(line)).group(1)
         dt = datetime.datetime.strptime(date, "%m/%d/%y") # Thankfully does not assume 1900s
@@ -48,7 +49,7 @@ for line in contents:
         rss += "\t<description><![CDATA[\n"
     elif insidePost:
         try:
-            rss += "\t\t" + line.decode('utf-8') + "\n"
+            rss += "\t\t" + line + "\n"
         except Exception as e:
             print(line)
             print(e)
