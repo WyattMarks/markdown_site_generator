@@ -4,7 +4,9 @@ import subprocess
 from shutil import copy2, rmtree
 import glob
 
-BASE_URL = "file:///home/lord/Documents/markdown_site_generator/output"
+BASE_URL = 'file:///home/user/Documents/markdown_site_generator/output'
+RSS_TITLE = 'example.com'
+RSS_DESCRIPTION = 'The Example Blog'
 
 def specialOperation(operation, currentPage):
     if operation == "pages":
@@ -27,7 +29,7 @@ def generate_posts(separator="<br/><br/><br/>\n"):
     files.reverse()
 
     for filename in files: 
-        filename = filename.replace('posts/', '')
+        filename = filename.replace('posts\\', '').replace('posts/', '') #support windows and linux
         posts += preprocess('posts/', filename, write=False) + separator
 
     return posts
@@ -138,6 +140,12 @@ def generate_site():
 
     #Delete temp files
     rmtree('temp_md_files')
+
+
+    from generate_rss import generate
+    rss_xml = generate(RSS_TITLE, BASE_URL, RSS_DESCRIPTION)
+    with open("output/rss.xml", "wb") as f:
+        f.write(rss_xml)
         
 
 
