@@ -5,6 +5,7 @@ from shutil import copy2, rmtree
 import glob
 
 BASE_URL = 'file:///home/user/Documents/markdown_site_generator/output'
+SITE_TITLE = 'example.com &#8211; Full of examples'
 RSS_TITLE = 'example.com'
 RSS_DESCRIPTION = 'The Example Blog'
 
@@ -19,6 +20,8 @@ def specialOperation(operation, currentPage):
         return BASE_URL
     elif operation == "this_page":
         return f"{BASE_URL}/{currentPage[0:-3]}.html"
+    elif operation == "title":
+        return f"<title>{SITE_TITLE}</title>"
 
 
 def generate_posts(separator="<br/><br/><br/>\n"):
